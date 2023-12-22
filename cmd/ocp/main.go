@@ -51,25 +51,41 @@ func (f *Filter) filterBySize(p []Product, size Size) []*Product {
 	return result
 }
 
-// OCP compliant way
+// OCP compliant way of implementing filters
+// The Filter method doesn't change, it support extension using FilterSpec interface implementation
+type BetterFilter struct {
+}
+
+func (bf *BetterFilter) Filter(p []Product, spec FilterSpec) []*Product {
+	fmt.Printf("Filtering (New)\n")
+	result := make([]*Product, 0)
+	for i, v := range p {
+		if spec.IsSatisfied(&v) {
+			result = append(result, &p[i])
+		}
+	}
+	return result
+}
 
 type FilterSpec interface {
 	IsSatisfied(*Product) bool
 }
 
+// Concrete filter
 type ColorFilter struct {
 	color Color
 }
 
-func (cf *ColorFilter) IsSatisfied(prod *Product) bool {
+func (cf ColorFilter) IsSatisfied(prod *Product) bool {
 	return cf.color == prod.color
 }
 
+// Concrete filter
 type SizeFilter struct {
 	size Size
 }
 
-func (sf *SizeFilter) IsSatisfied(product *Product) bool {
+func (sf SizeFilter) IsSatisfied(product *Product) bool {
 	return sf.size == product.size
 }
 
@@ -95,20 +111,17 @@ func main() {
 	}
 
 	// Doing the OCP compliant way
-	cf := ColorFilter{green}
-	fmt.Println("Filtering by Color (New)")
-	for _, v := range products {
-		if cf.IsSatisfied(&v) {
-			fmt.Printf(" - %s is green\n", v.name)
-		}
+	bf := BetterFilter{}
+
+	cs := ColorFilter{green} // green filter
+	gp = bf.Filter(products, cs)
+	for _, v := range gp {
+		fmt.Printf(" - %s is green\n", v.name)
 	}
 
-	// Doing the OCP compliant way
-	sf := SizeFilter{small}
-	fmt.Println("Filtering by Size (New)")
-	for _, v := range products {
-		if sf.IsSatisfied(&v) {
-			fmt.Printf(" - %s is small\n", v.name)
-		}
+	ss := SizeFilter{small}
+	sp = bf.Filter(products, ss)
+	for _, v := range sp {
+		fmt.Printf(" - %s is small\n", v.name)
 	}
 }
