@@ -49,4 +49,12 @@ Few principles to take into consideration while doing code designing (SOLID)
 
 4. ISP - Interface Segregation Principle
 
+    :heavy_check_mark: Keep the interface as chosive as possible and not mix all features into a single. When required, aggregate multiple interfaces into a single interface or implement a composite pattern with whole containing parts which are individual interfaces of its own type.
+
+    An easy example is,
+    * A *Printer*, *Scanner* interface types, under a composite interface type called *Multifunctiondevice*. 
+    * So, the device that supports both scanning and printing, will implement the new multifunctiondevice interface. And the ones that supports only printing, will implement *printer* interface. 
+    * Clients either will bind to a MFD interface or the ones that do not care about scanning, will bind itself to *Printer* only interface types.
+
+
 5. DIP - Dependency Inversion Principle
