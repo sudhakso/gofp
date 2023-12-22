@@ -58,3 +58,10 @@ Few principles to take into consideration while doing code designing (SOLID)
 
 
 5. DIP - Dependency Inversion Principle
+
+    :heavy_check_mark: A High level module should not depend on Low level module directly, but through abstractions.
+
+    An easy example to relate to is,
+    * A high level *FamilyTree* type depending on a *Relationship* low-level type to enumerate all the relationships to build the family tree.
+    * As per DIP, FamilyTree type *must not* depend on *Relationship* type at all.
+    * Instead use the abstraction to interact with Relationship type.
