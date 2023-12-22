@@ -99,18 +99,30 @@ func main() {
 	products := []Product{apple, tree, house}
 
 	// Calling filters - anti-pattern
+	// 2 issues,
+	// 1. It binds the client to the filter type closely
+	// 2. Each time a new capability is added, Filter type undergoes change and client as well to adapt the change.
 	f := Filter{}
+
+	// filter 1
 	gp := f.filterByColor(products, green)
 	for _, v := range gp {
 		fmt.Printf(" - %s is green\n", v.name)
 	}
 
+	// filter 2
 	sp := f.filterBySize(products, small)
 	for _, v := range sp {
 		fmt.Printf(" - %s is small\n", v.name)
 	}
 
+	// filter3 .. and so on
+
 	// Doing the OCP compliant way
+
+	// Few goodness about the design
+	// 1. BetterFilter type doesn't change while new capabilities gets introduced.
+	// 2. Client implements new bindings to implement the new features, while the older clients continues to work.
 	bf := BetterFilter{}
 
 	cs := ColorFilter{green} // green filter

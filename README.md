@@ -34,6 +34,19 @@ Few principles to take into consideration while doing code designing (SOLID)
 
 3. LSP - Liskov Substitution Principle
 
+    :heavy_check_mark: If a type implements an interface, all its inherited sub-types can be substituted by the client in their implementation and everything should work as expected.
+
+    An easy example would be,
+    * A rectangle has four sides, and implements *Dimension* interface with attributes,
+        * length (with GET/SET functions)
+        * breadth (with GET/SET functions)
+    * A square *is a* rectange with length == breadth, and implements *Dimension* interface and has attributes,
+        * size
+    So, if *Dimension* interface has following functions,
+    * getWidth(), setWidth()
+    * getHeight(), setHeight()
+    Eventhough *Square* implements Dimension interface, it cannot expose setWidth & setHeight functions separately. So eventhoug *Square* is a *Rectangle*, it cannot be implemented through inheritence. 
+
 4. ISP - Interface Segregation Principle
 
 5. DIP - Dependency Inversion Principle
