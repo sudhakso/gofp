@@ -39,4 +39,14 @@ func main() {
 			WithCPU(8).
 			WithMemory(64)
 	})
+
+	//Lazy initialization implementation using Builder
+	lb := builder.LazyMachineBuilder{}
+	lb.Name("LazyVM").
+		WithCPU(16)
+	
+	//...After a while
+	//Build
+	lm := lb.Build()
+	fmt.Println("\nLazy machine created - ", *lm)
 }
