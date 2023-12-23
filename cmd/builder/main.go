@@ -32,4 +32,11 @@ func main() {
 	mac :=	bb.Build()
 	fmt.Printf("Create better VM - %s", mac.String())
 
+	// builder parameterization to hide inner type
+	// Here machine object is not accessible directly to the clients
+	builder.BuildMachine(func(pmb *builder.ParameterizedMachineBuilder) {
+		pmb.Name("myProtectedVM").
+			WithCPU(8).
+			WithMemory(64)
+	})
 }

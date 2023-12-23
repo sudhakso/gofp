@@ -1,5 +1,7 @@
 package builder
 
+// Builder facet implementation
+
 import (
 	"fmt"
 	"strings"
