@@ -16,5 +16,20 @@ func main() {
 
 	vm := b.Create()
 	// show VM properties
-	fmt.Printf("Created VM - %s", vm.String())
+	fmt.Printf("Created VM - %s\n", vm.String())
+
+	// Better builder via aggregation
+	bb := builder.NewMachineBuilder()
+	bb.Name("myBetterVM").
+		Compute().
+			WithCPU(4).
+			Memory(16).
+		Network().
+			AttachNetwork("VM Network").
+		Storage().
+			AllocateDisk(120)
+	
+	mac :=	bb.Build()
+	fmt.Printf("Create better VM - %s", mac.String())
+
 }

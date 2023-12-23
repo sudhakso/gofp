@@ -11,7 +11,7 @@ type VirtualMachine struct {
 func (vm *VirtualMachine) String() string {
 	var b strings.Builder
 
-	b.WriteString("VM Name - ")
+	b.WriteString("\n	VM Name - ")
 	b.WriteString(vm.name)
 
 	// Show networks
