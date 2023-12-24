@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/gofp/pkg/builder/factory"
+	"github.com/gofp/pkg/factory"
 )
 
 func main() {
