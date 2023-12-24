@@ -12,6 +12,11 @@ type SecureStore interface {
 	Value(key string) string
 }
 
+// Abstract method to return value
+func GetSecretValue(store SecureStore, key string) string {
+	return store.Value(key)
+}
+
 // Hide the type from usage outside the package
 type secretStore struct {
 	kv map[string]string
